@@ -2,8 +2,8 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
-import { addToHistory, deleteVideo } from '../services/allAPI';
-function VideoCard1({displayVideo, setDeleteVideoStatus}) {
+import { addToHistory, deleteVC, deleteVideo ,  } from '../services/allAPI';
+function VideoCard1({displayVideo, setDeleteVideoStatus ,ispresent }) {
 
   const [show, setShow] = useState(false);
 
@@ -31,6 +31,10 @@ function VideoCard1({displayVideo, setDeleteVideoStatus}) {
     console.log(`the id of the videocard dragged is ${id}`);
     e.dataTransfer.setData("videoID" , id)
   }
+  const removecategoryvideo =async(id)=>{
+    const response =await deleteVC(id)
+    console.log(response);
+  }
   return (
    <>
     <div className='mt-3'>
@@ -41,7 +45,10 @@ function VideoCard1({displayVideo, setDeleteVideoStatus}) {
         <Card.Title className='d-flex justify-content-between align-items-center'>
           <h5>{displayVideo.caption}</h5>
         </Card.Title>
-        <button onClick={()=>removeVideo(displayVideo?.id)} className='btn btn-danger '><i class="fa-solid fa-trash"></i></button>
+       {!ispresent?
+         <button onClick={()=>removeVideo(displayVideo?.id)} className='btn btn-danger '><i class="fa-solid fa-trash"></i></button>:
+         <button  className='btn btn-warning' onClick={()=>removecategoryvideo(displayVideo?.id)}><i class="fa-solid fa-trash"></i></button>
+       }
       
       </Card.Body>
     </Card>

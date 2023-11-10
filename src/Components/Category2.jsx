@@ -19,6 +19,8 @@ function Category2() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  
+
   // function to add category
   const addCategory =async()=>{
     console.log(categoryName);
@@ -61,7 +63,7 @@ function Category2() {
   const dragOver=(e)=>{
     e.preventDefault()
   }
-
+  
   const videoDrop = async(e, categoryID)=>{
             console.log(`dropped on the category id ${categoryID}`);
             let videoId = e.dataTransfer.getData("videoID")
@@ -75,6 +77,8 @@ function Category2() {
             await updateCategory(categoryID,selectedCategory)
             allCategory()
   }
+  
+  
 
   useEffect(()=>{
     allCategory()
@@ -82,7 +86,7 @@ function Category2() {
   return (
     
          <>
-         <div className='d-grid ms-3'> 
+         <div className='d-grid ms-3' > 
           <button onClick={handleShow} style={{width:'300px'}}  className='btn btn-warning'>Add new Category</button>
          </div>
         {categories?.length>0?
@@ -91,11 +95,11 @@ function Category2() {
                <h6>{item.categoryName}</h6>
                <button onClick={()=>deleteACategory(item?.id)} className='btn btn-danger '><i class="fa-solid fa-trash"></i></button>
         </div>
-        <Row>
+        <Row  >
           <Col>
           {
             item?.allVideos?.length >0?
-            item?.allVideos?.map(card=>(<VideoCard1 displayVideo={card}/>))
+            item?.allVideos?.map(card=>(<VideoCard1 displayVideo={card} ispresent={true}/>))
             :<p>Nothing to display</p>
           }
           </Col>

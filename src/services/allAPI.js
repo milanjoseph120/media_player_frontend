@@ -60,3 +60,8 @@ export const getAVideo = async(id)=>{
 export const updateCategory =async(id,body)=>{
     return await common ('PUT', `${serverURL}/category/${id}`, body)
 }
+
+// api to delete videos from category
+export const deleteVC =async(id)=>{
+    return await common ('DELETE', `${serverURL}/category/${id}`,{})
+}
